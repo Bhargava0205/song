@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sing Your Lyrics</title>
+    <script src="https://cdn.jsdelivr.net/npm/tone@14.8.37/build/Tone.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sing Your Lyrics</h1>
+    <button onclick="singLyrics()">Click to Sing</button>
+    
+    <script>
+        async function singLyrics() {
+            // Initialize the Tone.js Synthesizer
+            const synth = new Tone.Synth().toDestination();
+
+            // Define the melody and lyrics
+            const melody = [
+                "C4", "E4", "G4", "C5",  // "It was a bright day in June, so clear"
+                "C4", "E4", "D4", "C4",  // "And then I saw her standing near"
+                "C4", "E4", "G4", "A4",  // "My chest felt heavy, my heart beat fast"
+                "C4", "E4", "F4", "E4",  // "A feeling I knew would forever last"
+                "C4", "E4", "G4", "F4",  // "The day would start with a search so keen"
+                "C4", "E4", "D4", "C4",  // "In the school bus, where she’d be seen"
+                "C4", "E4", "G4", "A4",  // "I’d count the minutes, steal the glance"
+                "C4", "E4", "F4", "E4"   // "Admiring her in that fleeting dance"
+            ];
+
+            // Define a simple rhythm pattern for the melody
+            const rhythm = [
+                0.5, 0.5, 0.5, 0.5,  // 4 notes in each measure
+                0.5, 0.5, 0.5, 0.5,
+                0.5, 0.5, 0.5, 0.5,
+                0.5, 0.5, 0.5, 0.5
+            ];
+
+            // Play the melody with timing
+            let time = 0;
+            for (let i = 0; i < melody.length; i++) {
+                synth.triggerAttackRelease(melody[i], rhythm[i], time);
+                time += rhythm[i];
+            }
+
+            // Start the Tone.js Transport (play the sound)
+            await Tone.start();
+        }
+    </script>
+</body>
+</html>
